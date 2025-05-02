@@ -31,11 +31,8 @@ export const Todo = () => {
 
   const onClickDelete = (id) => {
     let result = confirm("本当に削除してもよろしいですか？");
-    if (result) {
-      setTodos(todos.filter(todo => todo.id !== id));
-    } else {
-      return;
-    }
+    if (!result) return;
+    setTodos(todos.filter(todo => todo.id !== id));
   }
 
   const onClickEdit = (selectedTodo) => {
@@ -64,11 +61,7 @@ export const Todo = () => {
             return (
               <li key={todo.id} className='parent-list'>
                 <div className='list-row'>
-                  {todo.checked ? (
-                    <input type="checkbox" onClick={() => onClickCheckBox(todo.id)} checked={true} readOnly />
-                  ) : (
-                    <input type="checkbox" onClick={() => onClickCheckBox(todo.id)} checked={false} readOnly/>
-                  )}
+                <input type="checkbox" onClick={() => onClickCheckBox(todo.id)} checked={todo.checked} readOnly />
                   {todo.editing ? (
                     <>
                       <input value={editingText} onChange={(e) => setEditingText(e.target.value)}/>
